@@ -24,8 +24,8 @@ async with Agent(LocalAgentConfig()) as agent:
 
 ## Key Concepts
 
-*   **`response.cancel()`**: Transient, scoped strictly to the active turn. Calling this method aborts active backend execution and triggers any active stream generator cursor to raise `AntigravityCancelledError`. Safe to call multiple times; once the stream completes, calling `.cancel()` is a safe, silent no-op.
-*   **`AntigravityCancelledError`**: A custom SDK exception raised when the active turn is aborted. Importantly, it **inherits from `asyncio.CancelledError`** (and thus `BaseException`).
-    - It cleanly bypasses generic `except Exception` blocks, preventing cancellation from being swallowed or mislogged as execution errors.
-    - Place it first in your exception catch hierarchy to explicitly handle SDK programmatic cancels separately from native task cancellations.
-*   **State Preservation**: History (completed steps, token usage) generated up to the cancellation boundary remains fully preserved inside `Conversation.history` for state persistence and resume flows.
+* **`response.cancel()`**: Transient, scoped strictly to the active turn. Calling this method aborts active backend execution and triggers any active stream generator cursor to raise `AntigravityCancelledError`. Safe to call multiple times; once the stream completes, calling `.cancel()` is a safe, silent no-op.
+* **`AntigravityCancelledError`**: A custom SDK exception raised when the active turn is aborted. Importantly, it **inherits from `asyncio.CancelledError`** (and thus `BaseException`).
+  * It cleanly bypasses generic `except Exception` blocks, preventing cancellation from being swallowed or mislogged as execution errors.
+  * Place it first in your exception catch hierarchy to explicitly handle SDK programmatic cancels separately from native task cancellations.
+* **State Preservation**: History (completed steps, token usage) generated up to the cancellation boundary remains fully preserved inside `Conversation.history` for state persistence and resume flows.

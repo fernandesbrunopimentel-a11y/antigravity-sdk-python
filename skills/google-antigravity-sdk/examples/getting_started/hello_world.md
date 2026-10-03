@@ -47,7 +47,7 @@ async with Agent(LocalAgentConfig()) as agent:
 > terminal. For production use cases or custom interaction flows, you should
 > implement your own loop using `agent.chat()` or by interacting directly with
 > the `Conversation` object.
-
+>
 > [!WARNING] **This method is not intended for automated agents.**
 > `run_interactive_loop()` requires interactive input from a human user in the
 > terminal. If an automated process attempts to run this, it will block
@@ -59,17 +59,17 @@ async with Agent(LocalAgentConfig()) as agent:
 When you call `await run_interactive_loop(config)`, the following mechanics
 apply:
 
--   **Prompts**:
-    -   It displays a `User:` prompt for standard chat input.
-    -   If the agent asks a structured question (e.g., via `AskQuestionHook`),
+- **Prompts**:
+  - It displays a `User:` prompt for standard chat input.
+  - If the agent asks a structured question (e.g., via `AskQuestionHook`),
         it will display `Question: <text>` and prompt with `Response:`.
--   **Screen Output**:
-    -   It prints "Starting interactive loop. Type 'exit' or 'quit' to end."
+- **Screen Output**:
+  - It prints "Starting interactive loop. Type 'exit' or 'quit' to end."
         when starting.
-    -   It prints the agent's final response prefixed with `Agent:`.
--   **How to Quit**:
-    -   Type `exit` or `quit` at the `User:` prompt.
-    -   Use `Ctrl+C` or `Ctrl+D` to interrupt.
+  - It prints the agent's final response prefixed with `Agent:`.
+- **How to Quit**:
+  - Type `exit` or `quit` at the `User:` prompt.
+  - Use `Ctrl+C` or `Ctrl+D` to interrupt.
 
 ```python
 from google.antigravity import LocalAgentConfig

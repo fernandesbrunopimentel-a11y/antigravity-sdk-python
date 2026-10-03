@@ -27,7 +27,7 @@ official documentation: -
 > [!IMPORTANT] **Do not assume valid model identifiers.** Avoid guessing model
 > names or assuming they follow a specific pattern. Always verify the valid
 > identifiers from official documentation or user context before using them.
-
+>
 > [!IMPORTANT] **Avoid setting the model explicitly unless requested.** It is
 > generally better to leave the model unset to use the default behavior, unless
 > the user has explicitly requested a specific model.
@@ -151,4 +151,3 @@ config = LocalAgentConfig(
     env={"PATH": "/custom/bin:" + os.environ.get("PATH", ""), "MY_CUSTOM_VAR": "foo"},
 )
 ```
-

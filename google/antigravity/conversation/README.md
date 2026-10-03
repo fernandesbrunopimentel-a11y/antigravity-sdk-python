@@ -13,7 +13,7 @@ The `conversation` package provides the `Conversation` class, which is the Layer
 The SDK has three layers. Understanding which layer owns which concern
 prevents confusion:
 
-```
+```text
 ┌──────────────────────────────────────────────┐
 │  Agent  (Layer 1 — Lifecycle & Config)       │
 │  Owns: config, hooks, triggers, policies,    │
@@ -37,7 +37,7 @@ prevents confusion:
 **What lives where:**
 
 | Concern | Owner | Why |
-|:--------|:------|:----|
+| :--- | :--- | :--- |
 | Config, hooks, policies, tools | **Agent** | These are *declarative setup* — they define what the agent can do, not what it has done. |
 | History, turns, usage, compaction | **Conversation** | These are *session state* — they accumulate as the agent interacts. |
 | Wire protocol, process lifecycle | **Connection** | This is *transport plumbing* — how bytes move. |
@@ -61,14 +61,15 @@ need:
 - **Transport access** — `agent.conversation.connection`
 
 Key features:
+
 - **Step History Accumulation**: It automatically records all `Step` objects received from the connection.
 - **History Limits**: It supports a maximum history size to prevent memory issues in long sessions, discarding oldest steps when the limit is exceeded.
 - **Turn Tracking**: It tracks where each turn (user prompt) starts in the history.
 - **Compaction Tracking**: It tracks where the model's context was compacted.
 - **Convenience Methods**:
-    - `chat(prompt)`: Sends a prompt and waits for the complete response, returning a `ChatResponse`. Natively supports both standard strings and rich `types.Content` multimodal payloads (lists of text strings and semantic content files like `Image` and `Document`).
-    - `send(prompt)`: Sends a prompt turn (non-blocking). Accepts strings or complex multimodal payloads.
-    - `receive_steps()`: Async iterator for receiving steps for the current turn.
+  - `chat(prompt)`: Sends a prompt and waits for the complete response, returning a `ChatResponse`. Natively supports both standard strings and rich `types.Content` multimodal payloads (lists of text strings and semantic content files like `Image` and `Document`).
+  - `send(prompt)`: Sends a prompt turn (non-blocking). Accepts strings or complex multimodal payloads.
+  - `receive_steps()`: Async iterator for receiving steps for the current turn.
 
 ## Usage Example
 

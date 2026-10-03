@@ -12,8 +12,8 @@ When an agent fails or behaves unexpectedly, follow these steps to help the user
 
 ### Finding Why It Failed
 
-1.  **Inspect Agent Thoughts**: If the interface or logs expose the agent's internal monologue or "thoughts", examine them to understand what it was trying to do before the failure. See [hello_world.md](../examples/getting_started/hello_world.md) for how to stream thoughts.
-2.  **Stream Logs**: Check the streaming logs (e.g., WebSocket connection logs, agent execution logs). These often contain the raw error messages and tracebacks. To see these logs in your console, you need to configure Python's root logger at the beginning of your script. Since the SDK uses standard Python logging, these settings apply globally to all SDK logs:
+1. **Inspect Agent Thoughts**: If the interface or logs expose the agent's internal monologue or "thoughts", examine them to understand what it was trying to do before the failure. See [hello_world.md](../examples/getting_started/hello_world.md) for how to stream thoughts.
+2. **Stream Logs**: Check the streaming logs (e.g., WebSocket connection logs, agent execution logs). These often contain the raw error messages and tracebacks. To see these logs in your console, you need to configure Python's root logger at the beginning of your script. Since the SDK uses standard Python logging, these settings apply globally to all SDK logs:
 
 ```python
 import logging
@@ -34,8 +34,8 @@ To make agents robust, they should handle errors gracefully and potentially reco
 
 The SDK provides specific exceptions that you can catch in your application code:
 
-*   **`AntigravityValidationError`**: Raised when input validation fails (e.g., invalid parameters passed to a tool or configuration).
-*   **`AntigravityConnectionError`**: Raised when connection issues occur (e.g., WebSocket drops, timeout).
+* **`AntigravityValidationError`**: Raised when input validation fails (e.g., invalid parameters passed to a tool or configuration).
+* **`AntigravityConnectionError`**: Raised when connection issues occur (e.g., WebSocket drops, timeout).
 
 Example:
 

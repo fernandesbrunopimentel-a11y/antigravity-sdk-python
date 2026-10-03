@@ -1,0 +1,44 @@
+[
+  {
+    "id": "86566a5d-af86-4535-932f-5e31f9b7e5db",
+    "title": "New Conversation",
+    "status": "active",
+    "messageCount": 0,
+    "totalTokens": 0,
+    "totalCost": 0,
+    "lastMessageAt": "2026-08-31T06:50:07.632Z",
+    "tags": [],
+    "metadata": {
+      "projectId": "default-project",
+      "model": "free-trial-model-with-daily-limit",
+      "mode": "debugging",
+      "connectedCodebasePath": "/Users/brunopimentel/antigravity-sdk-python"
+    },
+    "codeContextIds": [],
+    "previous_session_intent": "pure_discussion",
+    "pinnedFilePaths": [],
+    "createdAt": "2026-08-31T06:50:07.632Z",
+    "updatedAt": "2026-08-31T06:50:07.632Z"
+  },
+  {
+    "id": "50d0104b-74da-4d24-bbf4-304f39d07aef",
+    "title": "New Conversation",
+    "status": "active",
+    "messageCount": 0,
+    "totalTokens": 0,
+    "totalCost": 0,
+    "lastMessageAt": "2026-08-31T06:50:07.649Z",
+    "tags": [],
+    "metadata": {
+      "projectId": "default-project",
+      "model": "free-trial-model-with-daily-limit",
+      "mode": "debugging",
+      "connectedCodebasePath": "/Users/brunopimentel/antigravity-sdk-python"
+    },
+    "codeContextIds": [],
+    "previous_session_intent": "pure_discussion",
+    "pinnedFilePaths": [],
+    "createdAt": "2026-08-31T06:50:07.649Z",
+    "updatedAt": "2026-08-31T06:50:07.649Z"
+  }
+]

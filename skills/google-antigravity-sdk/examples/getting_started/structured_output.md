@@ -41,8 +41,8 @@ async with Agent(config) as agent:
 
 ## Key Concepts
 
--   **`response_schema`**: You can pass a Pydantic model to `LocalAgentConfig`
+- **`response_schema`**: You can pass a Pydantic model to `LocalAgentConfig`
     via the `response_schema` parameter to enforce structured output.
--   **`response.structured_output()`**: This method retrieves the parsed JSON
+- **`response.structured_output()`**: This method retrieves the parsed JSON
     data matching the specified schema. It returns a dictionary (or `None` if
     parsing failed).

@@ -1,5 +1,8 @@
 # Google Antigravity SDK
 
+[![Runpod](https://api.runpod.io/badge/fernandesbrunopimentel-a11y/antigravity-sdk-python)](https://console.runpod.io/hub/listing/fernandesbrunopimentel-a11y/antigravity-sdk-python)
+
+
 The Google Antigravity SDK is a Python SDK for building AI agents powered by
 Antigravity and Gemini. It provides a secure, scalable, and stateful
 infrastructure layer that abstracts the agentic loop, letting you focus on what
@@ -27,6 +30,7 @@ Get started by running one of the [`examples/`](examples/), such as the
 export GEMINI_API_KEY="your_api_key_here"
 python ./examples/getting_started/hello_world.py
 ```
+
 ## Gemini Enterprise Agent Platform (formerly Vertex AI)
 
 To use the SDK with Gemini Enterprise Agent Platform (formerly Vertex AI),
@@ -301,7 +305,7 @@ await run_interactive_loop(config)
 The SDK follows a three-layer architecture:
 
 | Layer | Purpose | Key Classes |
-|:------|:--------|:------------|
+| :--- | :--- | :--- |
 | **Layer 1** — Simplified | High-level, batteries-included entry point | `Agent` |
 | **Layer 2** — Session | Stateful session with history and convenience methods | `Conversation`, `ChatResponse`, `Step`, `ToolCall`, `AgentConfig`, `HookRunner`, `ToolRunner`, `TriggerRunner` |
 | **Layer 3** — Adapter | Transport and backend abstraction | `Connection`, `ConnectionStrategy`, `LocalConnection` |
@@ -310,13 +314,13 @@ The SDK follows a three-layer architecture:
 
 For more detailed documentation on specific components, see:
 
--   [Agent](google/antigravity/agent.py) — High-level, batteries-included entry point.
--   [Connections](google/antigravity/connections/README.md) — Transport and backend abstraction.
--   [Conversation](google/antigravity/conversation/README.md) — Stateful session management.
--   [Hooks](google/antigravity/hooks/README.md) — Agent lifecycle interception and policies.
--   [MCP](google/antigravity/mcp/README.md) — Model Context Protocol integration.
--   [Tools](google/antigravity/tools/README.md) — In-process tool execution.
--   [Triggers](google/antigravity/triggers/README.md) — Background tasks and external events.
+- [Agent](google/antigravity/agent.py) — High-level, batteries-included entry point.
+- [Connections](google/antigravity/connections/README.md) — Transport and backend abstraction.
+- [Conversation](google/antigravity/conversation/README.md) — Stateful session management.
+- [Hooks](google/antigravity/hooks/README.md) — Agent lifecycle interception and policies.
+- [MCP](google/antigravity/mcp/README.md) — Model Context Protocol integration.
+- [Tools](google/antigravity/tools/README.md) — In-process tool execution.
+- [Triggers](google/antigravity/triggers/README.md) — Background tasks and external events.
 
 ## License
 

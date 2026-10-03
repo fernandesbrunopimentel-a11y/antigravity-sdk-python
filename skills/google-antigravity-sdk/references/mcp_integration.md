@@ -19,9 +19,9 @@ For a concrete code example of setting up and using MCP, see
 
 Google Antigravity SDK supports two main ways to connect to MCP servers:
 
-1.  **Stdio Transport**: The SDK launches and manages the MCP server process,
+1. **Stdio Transport**: The SDK launches and manages the MCP server process,
     communicating over standard input/output.
-2.  **Streamable HTTP Transport**: The SDK connects to a remote MCP server
+2. **Streamable HTTP Transport**: The SDK connects to a remote MCP server
     running as a web service using Streamable HTTP.
 
 ## Stdio Transport Configuration
@@ -174,9 +174,9 @@ policies.
 > [!WARNING] **Identifier Safety**: FastMCP (used under the hood) requires tool
 > and parameter names to be valid Python identifiers. Ensure your MCP server
 > adheres to this.
-
+>
 > [!IMPORTANT] **Permissions**: Failing to grant permissions for MCP tools will
 > prevent the agent from using them, even if the server is correctly connected.
-
+>
 > [!NOTE] **Timeouts**: External processes can cause timeouts if they block the
 > customization server. Ensure your MCP server is responsive.

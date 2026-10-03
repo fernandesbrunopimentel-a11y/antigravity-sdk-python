@@ -25,17 +25,17 @@ async with Agent(config) as agent:
     print(f"Total tokens: {usage.total_token_count}")
 ```
 
-The `UsageMetadata` object contains: * `prompt_token_count`: Number of tokens in
-the prompt. * `cached_content_token_count`: Number of tokens from cached
-content. * `candidates_token_count`: Number of tokens in the generated
-candidates (excluding thinking). * `thoughts_token_count`: Number of tokens used
+The `UsageMetadata` object contains: *`prompt_token_count`: Number of tokens in
+the prompt.* `cached_content_token_count`: Number of tokens from cached
+content. *`candidates_token_count`: Number of tokens in the generated
+candidates (excluding thinking).* `thoughts_token_count`: Number of tokens used
 for thinking/reasoning. * `total_token_count`: Sum of prompt + candidates +
 thinking tokens.
 
 > [!IMPORTANT] **Thinking tokens** can significantly increase the total count
 > unexpectedly, especially with models that support extended thinking. Always
 > monitor `thoughts_token_count` if you are using thinking models.
-
+>
 > [!CAUTION] If the agent execution fails (e.g., due to an invalid API key or
 > backend error), token usage counts may be reported as 0.
 

@@ -13,6 +13,7 @@ management details of where the agent is running.
 agent backend. Layer 2 APIs depend ONLY on this interface.
 
 Key methods and properties:
+
 - `send(prompt, **kwargs)`: Sends a prompt to the agent.
 - `receive_steps()`: An async iterator that yields `Step` objects as they are
   completed by the agent.
@@ -28,6 +29,7 @@ It handles process management, transport setup, authentication, and health
 checking specific to a backend type.
 
 Key methods:
+
 - `connect()`: Returns the established `Connection`.
 - `__aenter__()` and `__aexit__()`: Support for use as an async context manager
   to manage the backend lifecycle.
@@ -49,7 +51,7 @@ Each connection strategy lives in its own sub-package under `connections/`.
 A strategy's sub-package co-locates its implementation, config, proto bindings,
 and tests:
 
-```
+```text
 connections/
 ├── connection.py            # ABCs: Connection, ConnectionStrategy, AgentConfig
 ├── connection_test.py
@@ -78,13 +80,13 @@ a Go-based local harness.
   `InputEvent`, `StepUpdate`, etc.) serialized to JSON.
 - **Config**: `LocalAgentConfig` in `local_connection_config.py`.
 - **Features**:
-    - Handles tool calls by executing them via `ToolRunner` and sending results
+  - Handles tool calls by executing them via `ToolRunner` and sending results
       back.
-    - Handles question requests from the harness and dispatches them via
+  - Handles question requests from the harness and dispatches them via
       `HookRunner` (interaction hooks).
-    - Dispatches session start/end and turn hooks.
-    - Supports loading skills from specified paths via `skills_paths`.
-    - Supports overriding the application data directory for generated artifacts and media via `app_data_dir`.
+  - Dispatches session start/end and turn hooks.
+  - Supports loading skills from specified paths via `skills_paths`.
+  - Supports overriding the application data directory for generated artifacts and media via `app_data_dir`.
 
 ## Usage Example
 

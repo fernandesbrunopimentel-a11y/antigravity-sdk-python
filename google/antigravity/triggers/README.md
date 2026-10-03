@@ -9,7 +9,7 @@ push messages back into the agent.
 Triggers complement **hooks** — they handle different concerns:
 
 | Concept | Hooks | Triggers |
-|---------|-------|----------|
+| --- | --- | --- |
 | Lifetime | Single dispatch point | Entire session |
 | Execution | Inline, blocking | Background, async |
 | Purpose | React to agent lifecycle | React to external events |
@@ -57,8 +57,7 @@ async with trigger_runner.TriggerRunner(
 
 The handle provided to every trigger at startup. Provides:
 
--   **`send(content)`**: Push a message to the agent.
-
+- **`send(content)`**: Push a message to the agent.
 
 ### Trigger Type
 
@@ -95,8 +94,8 @@ efficient OS-level watching (lazy import — only needed if you use this helper)
 
 The callback receives a `list[FileChange]` where each `FileChange` has:
 
--   **`kind`**: A `FileChangeKind` enum (`ADDED`, `MODIFIED`, `DELETED`).
--   **`path`**: Absolute path to the changed file.
+- **`kind`**: A `FileChangeKind` enum (`ADDED`, `MODIFIED`, `DELETED`).
+- **`path`**: Absolute path to the changed file.
 
 ```python
 async def handle_change(ctx, changes: list[FileChange]):
@@ -111,12 +110,12 @@ my_trigger = on_file_change("/path/to/watched/dir", handle_change)
 
 Manages the lifecycle of registered triggers:
 
--   **`start()`**: Creates an asyncio task per trigger. Called at session start.
--   **`stop()`**: Cancels all tasks and waits for cleanup. Called at session end.
--   **`async with`**: Supports use as an async context manager for automatic cleanup.
--   **Isolation**: Unhandled exceptions in a trigger are logged but don't crash
+- **`start()`**: Creates an asyncio task per trigger. Called at session start.
+- **`stop()`**: Cancels all tasks and waits for cleanup. Called at session end.
+- **`async with`**: Supports use as an async context manager for automatic cleanup.
+- **Isolation**: Unhandled exceptions in a trigger are logged but don't crash
     the session or affect other triggers. No auto-restart.
--   **No ordering**: Triggers run as independent tasks with no ordering
+- **No ordering**: Triggers run as independent tasks with no ordering
     guarantees.
 
 Developers are responsible for everything between start and stop — their own
@@ -128,7 +127,7 @@ event loops, cleanup, and side effects.
 
 ## Architecture
 
-```
+```text
 +-------------------------------------------+
 |                Session                     |
 |                                           |
@@ -157,7 +156,7 @@ Connection.
 ## Files
 
 | File | Role |
-|------|------|
+| --- | --- |
 | `triggers.py` | `TriggerContext`, `Trigger` type alias |
 | `trigger_runner.py` | `TriggerRunner` lifecycle management |
 | `helpers.py` | `every()`, `on_file_change()` factories |

@@ -9,6 +9,7 @@ The `tools` package provides utilities for managing and executing tools within t
 `ToolRunner` is a registry and executor for in-process Python tools. It maintains a mapping of tool names to callables and handles their execution, including running synchronous functions in a separate thread to avoid blocking the async event loop.
 
 Key features:
+
 - **Registration**: Register tools with `register(tool, name=None)`.
 - **Execution**: Execute a tool by name with `execute(tool_name, **kwargs)`.
 - **Batch Processing**: Process a list of `ToolCall` objects and return `ToolResult` objects with `process_tool_calls(tool_calls)`.
@@ -104,7 +105,7 @@ policies = [
 ### When to use which
 
 | Approach | Model sees the tool? | Token cost | Best for |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `disabled_tools` / `enabled_tools` | No | None | Tools irrelevant to the agent's purpose |
 | `policy.deny()` | Yes | Wasted on failed calls | Conditional or argument-dependent restrictions |
 

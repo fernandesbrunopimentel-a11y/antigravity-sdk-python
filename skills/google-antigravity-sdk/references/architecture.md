@@ -35,16 +35,16 @@ decouples higher-level APIs from specific transport details or backend locations
 The core concepts work together in a hierarchical fashion to manage an
 interaction:
 
-1.  **Configuration**: The user defines the desired behavior and capabilities in
+1. **Configuration**: The user defines the desired behavior and capabilities in
     an `AgentConfig`.
-2.  **Orchestration**: An `Agent` is instantiated with this configuration. When
+2. **Orchestration**: An `Agent` is instantiated with this configuration. When
     the agent session starts, it uses the configuration to determine the
     appropriate connection strategy and creates a `Conversation`.
-3.  **State & History**: The `Conversation` object represents the active
+3. **State & History**: The `Conversation` object represents the active
     session. It establishes the low-level `Connection` to the backend and acts
     as the central hub for maintaining message history and managing the
     turn-by-turn flow of the interaction.
-4.  **Communication**: When you send a message (e.g., via `agent.chat()`), the
+4. **Communication**: When you send a message (e.g., via `agent.chat()`), the
     `Conversation` uses the underlying `Connection` to transmit data to the
     backend and stream the response back.
 

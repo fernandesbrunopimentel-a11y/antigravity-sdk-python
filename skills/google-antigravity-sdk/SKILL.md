@@ -10,7 +10,7 @@ description: "Design, implement, and debug autonomous AI agents and multi-agent 
 Before proceeding with any Google Antigravity tasks, ensure the environment is
 ready:
 
--   **Verify Applicability**: If operating in an existing codebase, verify that
+- **Verify Applicability**: If operating in an existing codebase, verify that
     using this Python SDK is possible and appropriate for the project.
 -   **Check Dependencies**: Check if `google-antigravity` is listed in the
     project's dependencies (e.g., `requirements.txt`, `pyproject.toml`).

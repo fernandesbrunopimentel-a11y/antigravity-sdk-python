@@ -35,8 +35,8 @@ npx ctx7 skills install /Google-Antigravity/antigravity-sdk-python google-antigr
 Provides core documentation and examples for building AI agents with the
 Antigravity SDK. It includes guides on:
 
--   Agent configuration
--   Error handling
--   Hooks
--   MCP integration
--   And more.
+- Agent configuration
+- Error handling
+- Hooks
+- MCP integration
+- And more.

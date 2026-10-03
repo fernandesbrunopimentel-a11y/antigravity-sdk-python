@@ -13,8 +13,8 @@ to ensure safety and prevent unauthorized actions.
 
 By default, `LocalAgentConfig` uses `policy.confirm_run_command()` which:
 
--   **Denies** `run_command` (shell execution is blocked)
--   **Allows** all other tools (view, edit, create files, etc.)
+- **Denies** `run_command` (shell execution is blocked)
+- **Allows** all other tools (view, edit, create files, etc.)
 
 This means new agents are **conservative by default** — they cannot execute shell
 commands unless you explicitly opt in.
@@ -48,18 +48,18 @@ config = LocalAgentConfig(
 Policies are evaluated in the following order of precedence (highest to lowest),
 supporting 9 levels of priority:
 
-1.  **Specific Deny**: `policy.deny("tool_name", ...)` (e.g.,
+1. **Specific Deny**: `policy.deny("tool_name", ...)` (e.g.,
     `policy.deny("run_command")` or `policy.deny(server_cfg, ["tool1"])`)
 2. **Specific Ask**: `policy.ask_user("tool_name", ...)`
 3. **Specific Allow**: `policy.allow("tool_name", ...)`
-4.  **Prefix Wildcard Deny**: `policy.deny("server/*", ...)` (e.g.,
+4. **Prefix Wildcard Deny**: `policy.deny("server/*", ...)` (e.g.,
     `policy.deny(server_cfg)`)
-5.  **Prefix Wildcard Ask**: `policy.ask_user("server/*", ...)`
-6.  **Prefix Wildcard Allow**: `policy.allow("server/*", ...)`
-7.  **Global Wildcard Deny**: `policy.deny("*", ...)` (e.g.,
+5. **Prefix Wildcard Ask**: `policy.ask_user("server/*", ...)`
+6. **Prefix Wildcard Allow**: `policy.allow("server/*", ...)`
+7. **Global Wildcard Deny**: `policy.deny("*", ...)` (e.g.,
     `policy.deny_all()`)
-8.  **Global Wildcard Ask**: `policy.ask_user("*", ...)`
-9.  **Global Wildcard Allow**: `policy.allow("*", ...)` (e.g.,
+8. **Global Wildcard Ask**: `policy.ask_user("*", ...)`
+9. **Global Wildcard Allow**: `policy.allow("*", ...)` (e.g.,
     `policy.allow_all()`)
 
 Within each priority group, the **first match wins** (short-circuit evaluation).
@@ -130,15 +130,15 @@ policy.ask_user(mcp_server_cfg, ["dangerous_tool"], handler=my_approval_handler)
 
 ### Wildcards
 
--   `policy.allow_all()`: Approves all tool calls. Equivalent to `allow("*")`.
--   `policy.deny_all()`: Denies all tool calls. Equivalent to `deny("*")`.
+- `policy.allow_all()`: Approves all tool calls. Equivalent to `allow("*")`.
+- `policy.deny_all()`: Denies all tool calls. Equivalent to `deny("*")`.
 
 ### Convenience Presets
 
--   `policy.confirm_run_command()`: Denies `run_command`, allows everything else.
+- `policy.confirm_run_command()`: Denies `run_command`, allows everything else.
     This is the **default** policy. Optionally accepts a `handler` to use
     `ask_user` instead of `deny`.
--   `policy.workspace_only(workspaces)`: Restricts `view_file`, `create_file`,
+- `policy.workspace_only(workspaces)`: Restricts `view_file`, `create_file`,
     and `edit_file` to paths within the given workspace directories.
     Automatically applied when `LocalAgentConfig.workspaces` is set.
 

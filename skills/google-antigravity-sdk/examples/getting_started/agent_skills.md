@@ -19,6 +19,7 @@ In a typical scenario, a user might ask the agent to use a specific skill and
 provide a path to it. The agent can then be configured to load that skill.
 
 > [!IMPORTANT] The `skills_paths` parameter accepts a list of paths. Each path in the list can be:
+>
 > - A directory that *contains* skill folders (each containing a `SKILL.md` file). The agent will discover all skills in that directory.
 > - A direct path to a specific skill folder (containing a `SKILL.md` file) to load just that skill.
 

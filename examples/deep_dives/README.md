@@ -13,6 +13,7 @@ that matches your use case.
 ## 🔌 Middleware & Lifecycle
 
 ### [agent_middleware.py](agent_middleware.py)
+
 **Hook middleware: transparent tool interception.**
 
 Demonstrates how stacked hooks create emergent behavior the agent is unaware of.
@@ -22,11 +23,12 @@ and recover from errors — all without the agent's knowledge.
 **Concepts:** `PreToolCallDecideHook`, `PostToolCallHook`, `OnToolErrorHook`,
 hook composition.
 
-```
+```bash
 python agent_middleware.py
 ```
 
 ### [host_tool_hooks.py](host_tool_hooks.py)
+
 **Every supported lifecycle hook wired and logged.**
 
 Registers one hook for each supported lifecycle event and logs what was received
@@ -37,7 +39,7 @@ interaction, and subagent hooks.
 `PostTurnHook`, `OnCompactionHook`, `OnInteractionHook`, decorator-based hook
 registration.
 
-```
+```bash
 python host_tool_hooks.py
 ```
 
@@ -46,6 +48,7 @@ python host_tool_hooks.py
 ## 💬 Multi-Agent Chat
 
 ### [round_based_chat.py](round_based_chat.py)
+
 **Synchronized parallel agent chat room with opt-out.**
 
 Three agents discuss topics as equals. All agents process in parallel each
@@ -55,11 +58,12 @@ Conversation continues until all agents pass or the max depth is reached.
 **Concepts:** Custom tools, triggers (`every()`), `asyncio.gather` parallelism,
 incremental prompt construction.
 
-```
+```bash
 python round_based_chat.py
 ```
 
 ### [async_chat.py](async_chat.py)
+
 **Fully async peer-to-peer agent chat — no rounds.**
 
 Each agent runs its own independent loop and reacts whenever any peer posts a
@@ -70,7 +74,7 @@ alternative.
 **Concepts:** `asyncio.Condition`, reactive wake-up, custom tools,
 self-terminating conversations.
 
-```
+```bash
 python async_chat.py
 ```
 
@@ -79,6 +83,7 @@ python async_chat.py
 ## 🎨 Multimodal
 
 ### [multimodal_pipeline.py](multimodal_pipeline.py)
+
 **Generator/discriminator pipeline with multimodal I/O.**
 
 A two-agent pipeline: a Generator creates an image using the built-in
@@ -89,7 +94,7 @@ true end-to-end multimodal input.
 **Concepts:** `generate_image` built-in tool, `Image` content type, multimodal
 `Content` input, independent agent instances.
 
-```
+```bash
 python multimodal_pipeline.py
 ```
 
@@ -98,6 +103,7 @@ python multimodal_pipeline.py
 ## 🤖 Autonomous Agents
 
 ### [doc_maintenance_agent.py](doc_maintenance_agent.py)
+
 **Autonomous documentation agent scoped to `.md` files.**
 
 An agent that reads source code and ensures corresponding markdown
@@ -107,11 +113,12 @@ editing to `.md` files within a target directory.
 **Concepts:** `policy.allow` / `policy.deny`, conditional `when=` predicates,
 `CapabilitiesConfig`, workspace scoping.
 
-```
+```bash
 python doc_maintenance_agent.py [directory]
 ```
 
 ### [docstring_maintenance_agent.py](docstring_maintenance_agent.py)
+
 **Autonomous docstring agent scoped to `.py` files.**
 
 Audits all Python files in a directory and ensures public symbols have
@@ -121,7 +128,7 @@ explicitly disabled via `CapabilitiesConfig`.
 **Concepts:** `BuiltinTools` enum, `disabled_tools`, policy-based file-type
 filtering, workspace scoping.
 
-```
+```bash
 python docstring_maintenance_agent.py [directory]
 ```
 
@@ -130,6 +137,7 @@ python docstring_maintenance_agent.py [directory]
 ## 🖥️ Interactive
 
 ### [interactive_cli.py](interactive_cli.py)
+
 **Full interactive CLI with custom tools, MCP, and tool approval.**
 
 A complete interactive agent session with custom Python tools, an MCP server
@@ -139,6 +147,6 @@ responses, and optional token usage telemetry.
 **Concepts:** `McpStdioServer`, `policy.ask_user`, `interactive.AskQuestionHook`,
 `CapabilitiesConfig`, streaming, `UsageMetadata`.
 
-```
+```bash
 python interactive_cli.py
 ```

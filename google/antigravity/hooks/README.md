@@ -18,28 +18,28 @@ three strict categories:
 
 ### 1. Inspect Hooks (Read-Only, Non-Blocking)
 
--   **Purpose**: Observability, logging, and monitoring.
--   **Behavior**: They receive data but cannot modify it. They cannot block
+- **Purpose**: Observability, logging, and monitoring.
+- **Behavior**: They receive data but cannot modify it. They cannot block
     execution. They are executed asynchronously or concurrently without delaying
     the main flow.
--   **Examples**: `PostToolCallHook`.
+- **Examples**: `PostToolCallHook`.
 
 ### 2. Decide Hooks (Read-Only, Blocking)
 
--   **Purpose**: Policy enforcement, permission checks, and guardrails.
--   **Behavior**: They receive data and return a `HookResult` indicating whether
+- **Purpose**: Policy enforcement, permission checks, and guardrails.
+- **Behavior**: They receive data and return a `HookResult` indicating whether
     execution should proceed (`allow=True`) or be aborted (`allow=False`). They
     cannot modify the data.
--   **Examples**: `PreToolCallDecideHook`.
+- **Examples**: `PreToolCallDecideHook`.
 
 ### 3. Transform Hooks (Modifying, Blocking)
 
--   **Purpose**: Data sanitization, prompt optimization, error recovery, and
+- **Purpose**: Data sanitization, prompt optimization, error recovery, and
     interactive responses.
--   **Behavior**: They receive data, can modify it, and must return the
+- **Behavior**: They receive data, can modify it, and must return the
     (potentially modified) data. They can also fail, triggering a fail-closed
     behavior.
--   **Examples**: `OnToolErrorHook`, `OnInteractionHook`.
+- **Examples**: `OnToolErrorHook`, `OnInteractionHook`.
 
 ## Execution Order and Security (TOCTOU)
 
@@ -47,9 +47,9 @@ For events that support multiple hook types (e.g., `PreToolCall`), the
 `HookRunner` enforces a strict execution order to prevent **Time-of-Check to
 Time-of-Use (TOCTOU)** vulnerabilities:
 
-1.  **Decisions**: Executed first to validate the data. If any Decide hook
+1. **Decisions**: Executed first to validate the data. If any Decide hook
     denies, execution is aborted immediately.
-2.  **Inspections**: Executed after the operation completes to log or observe
+2. **Inspections**: Executed after the operation completes to log or observe
     the actual execution context.
 
 Example for `PreToolCall`: `PreToolCallDecideHook` $\rightarrow$
@@ -60,10 +60,10 @@ Example for `PreToolCall`: `PreToolCallDecideHook` $\rightarrow$
 Hooks operate within a hierarchical context system that allows state sharing and
 correlation across different lifecycle events:
 
-1.  **`SessionContext`**: Scoped to the entire agent session.
-2.  **`TurnContext`**: Scoped to a single turn (prompt/response cycle). Inherits
+1. **`SessionContext`**: Scoped to the entire agent session.
+2. **`TurnContext`**: Scoped to a single turn (prompt/response cycle). Inherits
     from `SessionContext`.
-3.  **`OperationContext`**: Scoped to a specific operation (e.g., a model call
+3. **`OperationContext`**: Scoped to a specific operation (e.g., a model call
     or tool call). Inherits from `TurnContext`.
 
 This hierarchy ensures that state set in a broader scope is visible to narrower
@@ -90,11 +90,11 @@ This separation is intentional due to:
 - **Purpose**: Hooks use a hierarchical context (`HookContext`) to share state
   across lifecycle events in a single turn or session. Tools use a flat,
   session-scoped context (`ToolContext`) focused on data needed for execution.
-    - *Example (HookContext)*: A `PreTurnHook` can store a `correlation_id` in
+  - *Example (HookContext)*: A `PreTurnHook` can store a `correlation_id` in
       the `TurnContext`. A subsequent `PreToolCallHook` in the same turn can
       read this `correlation_id` to annotate logs, correlating the tool call
       with the original user prompt.
-    - *Example (ToolContext)*: A pagination tool can store a `next_page_token`
+  - *Example (ToolContext)*: A pagination tool can store a `next_page_token`
       in the `ToolContext`. In the next turn, if the model calls the same tool
       again, the tool can read the token to fetch the next page without the
       model needing to remember it.
@@ -109,17 +109,17 @@ Hook behavior depends on the connection type.
 
 ### `LocalConnection`
 
--   **Built-in tool hooks** (view_file, run_command, edit_file, etc.):
+- **Built-in tool hooks** (view_file, run_command, edit_file, etc.):
     `PreToolCallDecideHook` runs and can **approve or deny** built-in tools.
     `PostToolCallHook` fires when the harness reports the tool as complete.
     `OnToolErrorHook` fires when the tool fails.
 
--   **Built-in tool results**: When `PostToolCallHook` fires for a built-in
+- **Built-in tool results**: When `PostToolCallHook` fires for a built-in
     tool, the `ToolResult.result` field contains the tool's output as a
     string. The following table shows what each tool surfaces:
 
     | Tool | Result Content |
-    |---|---|
+    | --- | --- |
     | `run_command` | Combined stdout and stderr |
     | `list_dir` | Formatted listing with names, types, and sizes |
     | `find_by_name` | Newline-separated list of matching filenames |
@@ -131,16 +131,16 @@ Hook behavior depends on the connection type.
 
     Large outputs may be truncated before delivery.
 
--   **Host-side (custom Python and MCP) tools**: The full hook pipeline runs
+- **Host-side (custom Python and MCP) tools**: The full hook pipeline runs
     (Decide → Execute → PostToolCall / OnToolError).
 
--   **Exception types in `OnToolErrorHook`**: When running against `LocalConnection`,
+- **Exception types in `OnToolErrorHook`**: When running against `LocalConnection`,
     exceptions are delivered across the stream as `RuntimeError` instances containing
     the error message string. Original exception subclasses (e.g. `ValueError`) are
     not preserved across the harness boundary. Do not rely on `isinstance` checks
     for specific exception subclasses.
 
--   **Shaping tool error messages**: When `OnToolErrorHook` fires (for both
+- **Shaping tool error messages**: When `OnToolErrorHook` fires (for both
     built-in harness tools and custom tools), the hook can return a custom error
     string. When a non-empty string is returned, it replaces the default error
     message or stacktrace delivered to the model on its next turn. To customize
@@ -149,7 +149,7 @@ Hook behavior depends on the connection type.
     tool implementation (e.g., catching exceptions and returning fallback
     outputs or raising descriptive exceptions).
 
--   **Subagent hooks**: Subagent invocations appear as `START_SUBAGENT` tool
+- **Subagent hooks**: Subagent invocations appear as `START_SUBAGENT` tool
     calls. `PreToolCallDecideHook` fires before the subagent starts, and
     `PostToolCallHook` fires when the subagent trajectory goes idle, with the
     subagent's final response as the result. Additionally, hooks fire for
@@ -162,9 +162,9 @@ Hook behavior depends on the connection type.
 
 To observe model-generated text:
 
--   Use **`PostTurnHook`**, which receives the complete model response after
+- Use **`PostTurnHook`**, which receives the complete model response after
     each agent turn completes.
--   Inspect **`conversation.history`** for the full step-by-step trajectory,
+- Inspect **`conversation.history`** for the full step-by-step trajectory,
     including intermediate model steps.
 
 ## Fail-Safe Strategy
@@ -200,14 +200,14 @@ hook = policy.enforce(policies)
 Policies are evaluated using a priority model where specificity and safety
 determine precedence. Within each level, **first match wins** (short-circuit):
 
-Level | Specificity | Decision   | Example
------ | ----------- | ---------- | ------------------------------
-1     | Specific    | `DENY`     | `deny("run_command")`
-2     | Specific    | `ASK_USER` | `ask_user("run_command", ...)`
-3     | Specific    | `APPROVE`  | `allow("run_command")`
-4     | Wildcard    | `DENY`     | `deny("*")`
-5     | Wildcard    | `ASK_USER` | `ask_user("*", ...)`
-6     | Wildcard    | `APPROVE`  | `allow("*")`
+| Level | Specificity | Decision | Example |
+| --- | --- | --- | --- |
+| 1 | Specific | `DENY` | `deny("run_command")` |
+| 2 | Specific | `ASK_USER` | `ask_user("run_command", ...)` |
+| 3 | Specific | `APPROVE` | `allow("run_command")` |
+| 4 | Wildcard | `DENY` | `deny("*")` |
+| 5 | Wildcard | `ASK_USER` | `ask_user("*", ...)` |
+| 6 | Wildcard | `APPROVE` | `allow("*")` |
 
 A policy is "specific" when its tool name is an exact tool name, and "wildcard"
 when the tool name is `"*"`.
@@ -247,7 +247,7 @@ There are two distinct mechanisms for restricting tool access, and they operate
 at different levels:
 
 | Mechanism | Where it acts | Model sees the tool? | Token cost | Best for |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | `CapabilitiesConfig.disabled_tools` / `enabled_tools` | Harness config (before model context is built) | **No** — tool is stripped entirely | None | Tools irrelevant to the agent's purpose |
 | `policy.deny()` | Hook layer (runtime, per-call) | **Yes** — tool remains in context | Wasted tokens on failed calls | Conditional or argument-dependent restrictions |
 
@@ -272,34 +272,34 @@ context, arguments, or user approval.
 
 The implementation is split across the following core files:
 
--   **`types.py`** (SDK root): Defines the canonical Pydantic V2 boundary types
+- **`types.py`** (SDK root): Defines the canonical Pydantic V2 boundary types
     (`ToolCall`, `Step`, `ToolResult`, `HookResult`, `QuestionResponse`,
     `QuestionHookResult`). All hook interfaces use these types. `HookResult`,
     `QuestionResponse`, and `QuestionHookResult` are re-exported from `hooks.py`
     for convenience.
--   **`hooks.py`**: Defines the base classes for `HookContext`, `HookResult`,
+- **`hooks.py`**: Defines the base classes for `HookContext`, `HookResult`,
     and the specialized hook interfaces (e.g., `PreToolCallDecideHook`).
--   **`hook_runner.py`**: Implements the `HookRunner` class, which manages the
+- **`hook_runner.py`**: Implements the `HookRunner` class, which manages the
     hook collections and implements the strict execution order dispatch logic.
--   **`utils/interactive.py`** (SDK root): Provides concrete implementations of hooks for
+- **`utils/interactive.py`** (SDK root): Provides concrete implementations of hooks for
     interactive CLI usage, such as `ToolConfirmationHook` and `AskQuestionHook`.
--   **`policy.py`**: Declarative tool call policy system with priority-based
+- **`policy.py`**: Declarative tool call policy system with priority-based
     evaluation. Produces a `PreToolCallDecideHook` from a list of policies.
 
 ## Tests
 
 Comprehensive unit tests are provided in:
 
--   **`hooks_test.py`**: Verifies base class behavior.
--   **`hook_runner_test.py`**: Verifies execution order, context scoping,
+- **`hooks_test.py`**: Verifies base class behavior.
+- **`hook_runner_test.py`**: Verifies execution order, context scoping,
     fail-closed behavior, and streaming dispatch.
--   **`utils/interactive_test.py`**: Verifies interactive CLI hooks.
--   **`policy_test.py`**: Verifies priority evaluation, short-circuiting,
+- **`utils/interactive_test.py`**: Verifies interactive CLI hooks.
+- **`policy_test.py`**: Verifies priority evaluation, short-circuiting,
     predicate handling, ASK_USER handlers, and HookRunner integration.
 
 ## Known Limitations
 
--   **Pre-turn hooks are SDK-side only.** The `pre_turn` hook intercepts
+- **Pre-turn hooks are SDK-side only.** The `pre_turn` hook intercepts
     user-initiated `send()` calls but cannot guard against Connection-initiated
     turns (e.g., background task completions, cron triggers). Full
     Connection-level turn interception requires protocol-level changes and will
@@ -307,7 +307,7 @@ Comprehensive unit tests are provided in:
 
 ## See Also
 
--   **[Triggers](../triggers/README.md)**: For long-lived background tasks that
+- **[Triggers](../triggers/README.md)**: For long-lived background tasks that
     react to external events (cron, file changes, webhooks) and push messages
     into the agent. Hooks handle agent lifecycle; triggers handle external
     events.
