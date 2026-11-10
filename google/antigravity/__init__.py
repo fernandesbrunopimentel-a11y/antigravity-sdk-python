@@ -42,6 +42,7 @@ from google.antigravity.types import ToolExecutionError
 from google.antigravity.types import UsageMetadata
 from google.antigravity.types import VertexEndpoint
 from google.antigravity.types import Video
+from google.antigravity import omni_fleet
 
 __all__ = [
     "Agent",
@@ -72,4 +73,5 @@ __all__ = [
     "Video",
     "ToolExecutionError",
     "from_file",
+    "omni_fleet",
 ]
